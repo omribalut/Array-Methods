@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      //Array functions gets only one argument which represents the element that the function is iterating on
+      // Exercise 1
+      //Map
+      const rectangles = [
+        {
+          width: 20,
+          height: 20,
+        },
+
+        {
+          width: 10,
+          height: 10,
+        },
+      ];
+
+      function getRectanglesSizes(rectangles) {
+        const newArray = rectangles.map(rectangleSize);
+        return newArray;
+      }
+
+      function rectangleSize(rectangle) {
+        const rectangleWithSize = {
+          width: rectangle.width,
+          height: rectangle.height,
+          size: rectangle.width * rectangle.height,
+        };
+        return rectangleWithSize;
+      }
+
+      console.log(getRectanglesSizes(rectangles));
+
+      // Exercise 2
+      //Map
+
+      const rectangles2 = [
+        {
+          width: 20,
+          height: 20,
+          size: 400,
+        },
+        {
+          width: 10,
+          height: 10,
+          size: 100,
+        },
+      ];
+
+      function getRectanglesSizes2(rectangles) {
+        const newArray = rectangles.map(rectangleSize2);
+        return newArray;
+      }
+
+      function rectangleSize2(rectangle) {
+        return rectangle.size;
+      }
+
+      console.log(getRectanglesSizes2(rectangles2));
+
+      //Exercise 3
+      //Filter
+      const numbers = [2, 4, 6, 8, 10];
+
+      function getNumbersGreaterThanX(numbers, x) {
+        const newArray = numbers.filter(function (num) {
+          if (num > x) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        return newArray;
+      }
+
+      console.log(getNumbersGreaterThanX(numbers, 3));
+
+      //Exercise 4
+      //Filter
+
+      const rectangles3 = [
+        {
+          width: 20,
+          height: 20,
+          size: 400,
+        },
+      ];
+
+      function getRectanglesGreaterThanX(rectangles, x) {
+        const newArray = rectangles.filter(function (rectangle) {
+          // filter works with boolean, "true" keeps the element in the array, "false" removes it
+          if (rectangle.size > x) {
+            return true; //if the rectangle size is bigger than x then the function will keep the rectangle in the array
+          } else {
+            return false; //if the rectangle size is smaller than x then the function will remove the rectangle from the array
+          }
+        });
+        return newArray;
+      }
+      console.log(getRectanglesGreaterThanX(rectangles3, 401)); //if x is bigger than all the rectangles sizes, an empty array will return
+
+      //Exercise 5
+      //Find
+      //Find function returns a single element and not an array, also boolean, if "true" the single element return, if "false",
+      const rectangles4 = [
+        {
+          height: 20,
+          width: 20,
+          size: 400,
+        },
+        {
+          height: 10,
+          width: 10,
+          size: 100,
+        },
+        {
+          height: 50,
+          width: 50,
+          size: 400,
+        },
+      ];
+
+      function findRectnagleWitheSameSize(rectangles, size) {
+        const foundRectangle = rectangles.find(function (rectangle) {
+          if (rectangle.size === size) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        return foundRectangle;
+      }
+      console.log(findRectnagleWitheSameSize(rectangles4, 50));
+
+      //Exercise 6
+      //Every
+
+      const rectangles5 = [
+        {
+          height: 20,
+          width: 20,
+          size: 400,
+        },
+        {
+          height: 20,
+          width: 20,
+          size: 400,
+        },
+      ];
+
+      function checkIfAllRectanglesHasSameSize(rectangles, size) {
+        // if(rectangles.length === 0){ //this case is when we have an empty array which return true becuase the "every" considers empty array as true by default
+        //     return false
+
+        // }
+        const areAllRectanglesSameSize = rectangles.every(function (rectangle) {
+          if (rectangle.size === size) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        return areAllRectanglesSameSize;
+      }
+      console.log(checkIfAllRectanglesHasSameSize(rectangles5, 300));
+
+      //Exercise 7
+      //Sort
+      //Sort is a different animal, this function gets two parameters
+
+      const rectangles6 = [
+        {
+          height: 20,
+          width: 20,
+          size: 400,
+        },
+        {
+          height: 20,
+          width: 20,
+          size: 300,
+        },
+        {
+          height: 20,
+          width: 20,
+          size: 200,
+        },
+        {
+          height: 20,
+          width: 20,
+          size: 100,
+        },
+        {
+          height: 20,
+          width: 20,
+          size: 500,
+        },
+      ];
+
+      function sortRectanglesBySize(rectangles) {
+        rectangles.sort(function (rectangle1, rectangle2) {
+          //another option
+          //     if(rectangle1.size < rectangle2.size){
+          //         return -1
+          //     }
+
+          //     if(rectangle1.size > rectangle2.size){
+          //         return 1
+          //     }
+          //     return 0
+          //
+
+          return rectangle1.size - rectangle2.size;
+        });
+        return rectangles;
+      }
+      console.log(sortRectanglesBySize(rectangles6));
+
+      //Exercise 8
+      //IndexOf + slice
+      const numbers = [23, 4, 23, 8, 23];
+
+      function getIndexNumberOfArray(numbers, num) {
+        let arrayOfIndexes = []; //creating an empty array to accumulate the indexes of num
+        let slicedArray = numbers; //creating a new array that will decrease by one every iteration. initializing it with the original array (numbers)
+        let i = 0; //creating a new variable that will keep tracking on the iterations
+        while (slicedArray.length > 0) {
+          //creating a while loop that will keep on looping as long as the sliced array isn't decreased until an empty array is left
+          const index = slicedArray.indexOf(num); //getting the index of the current iterated sliced array
+          if (index === 0) {
+            //a condition that checks if num is the first number in the current sliced array
+            arrayOfIndexes.push(i); //if it's the first number in the sliced array, than pushing i to the new array of indexes
+          }
+
+          slicedArray = slicedArray.slice(1, slicedArray.length); // slicing the array so it's decreased by one until the end of the array
+          i++; // increasing i by one so it will by in sync with the iteration count
+        }
+        return arrayOfIndexes;
+      }
+
+      console.log(getIndexNumberOfArray(numbers, 23));
+
+      //Exercise 9
+      // FindIndex + slice
+      const rectnagles7 = [
+        { width: 100, height: 100, size: 400 },
+        { width: 100, height: 100, size: 300 },
+        { width: 100, height: 100, size: 400 },
+      ];
+
+      function findIndexsOfRectanglesArrayBySize(rectangles, size) {
+        let arrayOfIndexes = []; //creating an empty array to accumulate the indexes of num
+        let slicedArray = rectangles; //creating a new array that will decrease by one every iteration. initializing it with the original array (numbers)
+        let i = 0; //creating a new variable that will keep tracking on the iterations
+        while (slicedArray.length > 0) {
+          //creating a while loop that will keep on looping as long as the sliced array isn't decreased until an empty array is left
+          const index = slicedArray.findIndex(function (rectangle) {
+            // we can write only this row return size === rectangle.size
+            if (size === rectangle.size) {
+              return true;
+            } else {
+              return false;
+            }
+          }); //getting the index of the current iterated sliced array
+          if (index === 0) {
+            //a condition that checks if num is the first number in the current sliced array
+            arrayOfIndexes.push(i); //if it's the first number in the sliced array, than pushing i to the new array of indexes
+          }
+
+          slicedArray = slicedArray.slice(1, slicedArray.length); // slicing the array so it's decreased by one until the end of the array
+          i++; // increasing i by one so it will by in sync with the iteration count
+        }
+        return arrayOfIndexes;
+      }
+
+      console.log(findIndexsOfRectanglesArrayBySize(rectnagles7, 400));
+
+      //Exercise 10
+      //Reduce
+      const strings = ["firstName", "lastName", "age"];
+
+      function convertsStringsToObjectKeys(strings) {
+        const obj = strings.reduce(function (accumulator, str, index) {
+          accumulator[str] = index;
+          return accumulator;
+        }, {});
+        return obj;
+      }
+      console.log(convertsStringsToObjectKeys(strings));
+    </script>
+  </body>
+</html>
